@@ -21,6 +21,11 @@ In the example above, `sum/2`'s docstring can be accessed by calling
 `math2:help(sum, 2)`, which returns the `"Returns the sum of the two
 provided numbers."` string literal.
 
+```erl
+math2:help(sum, 2).
+"Returns the sum of the two provided numbers."
+```
+
 
 ## Author(s)
 
