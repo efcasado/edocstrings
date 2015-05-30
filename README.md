@@ -26,6 +26,16 @@ math2:help(sum, 2).
 "Returns the sum of the two provided numbers."
 ```
 
+## Considerations
+
+- In functions with more than one clause, the `docstring` must be
+  defined as the first expression in the first clause.
+
+- Docstrings can only be defined for exported functions.
+
+- `edocstrings` will inject a `help/2` function to all your modules
+  compiled using the `edocstirngs_ptransform` parse transform.
+
 
 ## Usage
 
