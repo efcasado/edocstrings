@@ -1,5 +1,6 @@
 edocstrings
 ===========
+[![Build Status](https://travis-ci.org/efcasado/edocstrings.svg?branch=master)](https://travis-ci.org/efcasado/edocstrings)
 
 A `docstring` is a string literal that occurs as the first expression
 in a function.
