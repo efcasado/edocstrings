@@ -20,7 +20,11 @@ f1() ->
     ok.
 
 f2() ->
-    ok.
+    f4().
 
 f3() ->
     "this is not a docstring".
+
+f4() ->
+    "this is not a docstring because this function is not a exported function",
+    ok.

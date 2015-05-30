@@ -23,5 +23,6 @@ docstring_found_test_()     ->
 docstring_not_found_test_() ->
     [
      ?_assertMatch({error, docstring_not_found}, dummy_module:help(f2, 0)),
-     ?_assertMatch({error, docstring_not_found}, dummy_module:help(f3, 0))
+     ?_assertMatch({error, docstring_not_found}, dummy_module:help(f3, 0)),
+     ?_assertMatch({error, docstring_not_found}, dummy_module:help(f4, 0))
     ].
