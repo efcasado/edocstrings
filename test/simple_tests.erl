@@ -17,7 +17,7 @@
 %%=========================================================================
 docstring_found_test_()     ->
     [
-     ?_assertMatch("This is a dummy docstring" , dummy_module:help(f1, 0))
+     ?_assertMatch("dummy docstring" , dummy_module:help(f1, 0))
     ].
 
 docstring_not_found_test_() ->
