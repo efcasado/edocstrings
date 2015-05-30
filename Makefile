@@ -10,7 +10,8 @@ PROJECT   = edocstrings
 
 ## Dependencies
 ##-------------------------------------------------------------------------
-DEPS      = forms
+DEPS      = forms meta
 dep_forms = git git@github.com:efcasado/forms.git master
+dep_meta  = git git@github.com:efcasado/meta.git  master
 
 include erlang.mk
