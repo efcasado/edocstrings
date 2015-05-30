@@ -27,6 +27,34 @@ math2:help(sum, 2).
 ```
 
 
+## Usage
+
+If you want to use docstrings in your Erlang project, all you need to
+do is add `edocstring` as a dependency and make sure you compile your
+erlang modules using the `edocstrings`'s parse transform.
+
+You can enable the `edocstring_ptransform` parse transform on an
+individual Erlang module by using the `-compile(<COMPILE_OPTION>)`
+module attribute.
+
+```erl
+-module(math2).
+
+-compile({parse_transform, edocstring_ptransform}).
+
+-export([math/2]).
+
+sum(A, B) ->
+    "Returns the sum of the two provided numbers.",
+    A + B.
+```
+
+Alternatively, you can tell the Erlang compiler that you want to use
+the `edocstrings`'s parse transform by using the
+`+{parse_transform,edocstrings_ptransform}` compile option when
+invoking the Erlang compiler.
+
+
 ## Author(s)
 
 - Enrique Fernandez `<enrique.fernandez@erlang-solutions.com>`
