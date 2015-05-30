@@ -1,0 +1,10 @@
+%% -*- mode: erlang -*-
+{application, edocstrings,
+ [
+  {description, "Erlang docstrings"},
+  {vsn, git},
+  {modules,
+   [
+    edocstrings_ptransform
+   ]}
+ ]}
