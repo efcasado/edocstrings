@@ -24,17 +24,24 @@ parse_transform(Forms, _Opts) ->
 %% Local functions
 %%=========================================================================
 fetch_docstrings(Forms) ->
-    forms:reduce(
-      fun(Form, Acc) ->
-              case has_docstring(Form) of
-                  {true, FDocstring}  ->
-                      [FDocstring| Acc];
-                  false ->
-                      Acc
-              end
-      end,
-      [],
-      Forms).
+    AllDocstrings =
+        forms:reduce(
+          fun(Form, Acc) ->
+                  case has_docstring(Form) of
+                      {true, FDocstring}  ->
+                          [FDocstring| Acc];
+                      false ->
+                          Acc
+                  end
+          end,
+          [],
+          Forms),
+
+    %% Filter out docstrings of non-exported functions
+    lists:filter(fun({{F, A}, _Docstring}) ->
+                         meta:is_function_exported(F, A, Forms)
+                 end,
+                 AllDocstrings).
 
 has_docstring({function, _Line, Name, Arity, [C |_Cs]}) ->
     %% if a function has more than one clause, the docstring must be
