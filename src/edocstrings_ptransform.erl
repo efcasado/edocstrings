@@ -18,7 +18,8 @@
 parse_transform(Forms, _Opts) ->
     Docstrings = fetch_docstrings(Forms),
     HelpF      = gen_help_function(Docstrings),
-    meta:add_function(HelpF, true, Forms).
+    Forms1     = remove_docstrings(Docstrings, Forms),
+    meta:add_function(HelpF, true, Forms1).
 
 
 %% Local functions
@@ -80,3 +81,29 @@ gen_help_function(Docstrings) ->
         {fun(F, A) -> D end, Bindings},
         {fun(_, _) -> {error, docstring_not_found} end, []}
       ]).
+
+remove_docstrings(Docstrings, Forms) ->
+    Functions = [ F || {F, _D} <- Docstrings ],
+
+    forms:map(
+      fun(Form) ->
+              remove_docstring(Form, Functions)
+      end,
+      Forms).
+
+remove_docstring(F = {function, _Line, Name, Arity, _Clauses}, Functions) ->
+    case lists:member({Name, Arity}, Functions) of
+        true  ->
+            remove_docstring(F);
+        false ->
+            F
+    end;
+remove_docstring(Form, _Functions) ->
+    Form.
+
+remove_docstring({function, Line, Name, Arity, [C| Cs]}) ->
+    C1 = remove_docstring(C),
+
+    {function, Line, Name, Arity, [C1| Cs]};
+remove_docstring({clause, Line, Args, Guards, [_E| Es]}) ->
+    {clause, Line, Args, Guards, Es}.
